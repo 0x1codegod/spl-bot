@@ -1,0 +1,19 @@
+{
+  "name": "spl-token-bot",
+  "version": "1.0.0",
+  "description": "spl token recovery bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x1codegod/spl-bot.git"
+  },
+  "author": "0x1codegod",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0x1codegod/spl-bot/issues"
+  },
+  "homepage": "https://github.com/0x1codegod/spl-bot#readme"
+}
