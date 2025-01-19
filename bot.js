@@ -19,7 +19,6 @@ const {
   console.log("0. Initializing...");
 
   // Define constants
-  const decimals = 6;
   const connection = new Connection(clusterApiUrl("mainnet"), "confirmed");
 
   // Load private keys from environment
@@ -59,7 +58,7 @@ const privateKey2 = bs58.decode(process.env.BENEFICIARY_PRIVATE_KEY);
     );
     console.log("Token balance:", tokenBalance.value.amount);
 
-    const amountToApprove = parseInt(tokenBalance.value.amount, 10) * (10 ** decimals);;
+    const amountToApprove = parseInt(tokenBalance.value.amount, 10);
 
     console.log(`3. Approving ${amountToApprove} tokens for Address2...`);
     await approve(
