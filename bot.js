@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const {
   Connection,
   Keypair,
@@ -20,8 +22,8 @@ const {
   const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
 
   // Private keys (replace with your actual keys)
-  const privateKey1 = Uint8Array.from([/* Private Key Array for Address1 */]);
-  const privateKey2 = Uint8Array.from([/* Private Key Array for Address2 */]);
+  const privateKey1 = Uint8Array.from([process.env.CONMPROMISED_PRIVATE_KEY]);
+  const privateKey2 = Uint8Array.from([process.env.BENEFICIARY_PRIVATE_KEY]);
 
   // Token Contract Address
   const tokenCA = new PublicKey("JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN");
