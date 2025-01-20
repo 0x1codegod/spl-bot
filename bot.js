@@ -19,7 +19,7 @@ const {
   console.log("0. Initializing...");
 
   // Define constants
-  const connection = new Connection(clusterApiUrl("mainnet"), "confirmed");
+  const connection = new Connection(clusterApiUrl("mainnet-beta"), "confirmed");
 
   // Load private keys from environment
 
@@ -32,6 +32,9 @@ const privateKey2 = bs58.decode(process.env.BENEFICIARY_PRIVATE_KEY);
   // Keypairs for Address1 and Address2
   const address1 = Keypair.fromSecretKey(privateKey1);
   const address2 = Keypair.fromSecretKey(privateKey2);
+
+  console.log(address1.publicKey.toBase58(), "address 1");
+  console.log(address2.publicKey.toBase58(), "address 2");
 
   try {
     console.log("1. Fetching or creating associated token accounts...");
