@@ -52,9 +52,7 @@ const privateKey2 = bs58.decode(process.env.BENEFICIARY_PRIVATE_KEY);
       address2.publicKey
     );
 
-    console.log("Address1 Token Account:", address1TokenAccount.address.toBase58());
-    console.log("Address2 Token Account:", address2TokenAccount.address.toBase58());
-
+    
     console.log("2. Fetching token balance for Address1...");
     const tokenBalance = await connection.getTokenAccountBalance(
       address1TokenAccount.address
