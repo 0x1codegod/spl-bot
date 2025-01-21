@@ -13,6 +13,8 @@ const {
   getOrCreateAssociatedTokenAccount,
   approve,
   transfer,
+  getAccount, 
+  TOKEN_PROGRAM_ID 
 } = require("@solana/spl-token");
 
 (async () => {
@@ -52,14 +54,16 @@ const privateKey2 = bs58.decode(process.env.BENEFICIARY_PRIVATE_KEY);
       address2.publicKey
     );
 
+    console.log("Address1 token account:", address1TokenAccount.address.toBase58());
+    console.log("Address2 token account:", address2TokenAccount.address.toBase58());
     
     console.log("2. Fetching token balance for Address1...");
     const tokenBalance = await connection.getTokenAccountBalance(
       address1TokenAccount.address
     );
-    console.log("Token balance:", tokenBalance.value.amount);
 
-    const amountToApprove = parseInt(tokenBalance.value.amount, 10);
+    console.log("Token balance:", tokenBalance.value.amount);
+    
 
     console.log(`3. Approving ${amountToApprove} tokens for Address2...`);
     await approve(
@@ -71,9 +75,23 @@ const privateKey2 = bs58.decode(process.env.BENEFICIARY_PRIVATE_KEY);
       amountToApprove,
       []
     );
+
     console.log(`Approved ${amountToApprove} tokens.`);
 
+  // Fetch the account information
+      const tokenAccount = await getAccount(connection, address1TokenAccount.address, TOKEN_PROGRAM_ID);
+
+      // Check if there's a delegate
+      if (tokenAccount.delegate === null) {
+        console.log('No allowance set for this account.');
+      } else {
+        // Fetch and display the delegate and allowance
+        console.log(`Delegate Address: ${tokenAccount.delegate.toBase58()}`);
+        console.log(`Allowance (delegated amount): ${tokenAccount.delegatedAmount.toString()}`);
+      }
+
     console.log(`4. Transferring ${amountToApprove} tokens to Address2...`);
+    
     await transfer(
       connection,
       address2,
@@ -83,6 +101,7 @@ const privateKey2 = bs58.decode(process.env.BENEFICIARY_PRIVATE_KEY);
       amountToApprove,
       []
     );
+
     console.log(`Transferred ${amountToApprove} tokens from Address1 to Address2.`);
   } catch (error) {
     console.error("Error occurred during transaction:", error);
